@@ -185,6 +185,8 @@ class TableViewController: UITableViewController {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
+        var beginEditing = true
+        
         if textField.tag == 2 {
             
             let popoverTVCDate = storyboard?.instantiateViewController(identifier: "PopoverViewControllerDate") as! PopoverViewControllerDate
@@ -200,7 +202,8 @@ class TableViewController: UITableViewController {
             textFieldsArray[2].text = date.stringFromDateWithString(format: "MM/dd/yyyy")
             
             tableView.endEditing(true)
-
+            beginEditing = false
+            
         } else if textField.tag == 3 {
             
             let popoverTableVCEducation = storyboard?.instantiateViewController(identifier: "PopoverEducationTableVC") as! PopoverEducationTableVC
@@ -214,10 +217,11 @@ class TableViewController: UITableViewController {
             present(popoverTableVCEducation, animated: true, completion: nil)
             
             tableView.endEditing(true)
-       
+            beginEditing = false
+            
         }
         
-        return true
+        return beginEditing
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
